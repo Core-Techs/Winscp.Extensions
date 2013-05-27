@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>CTX.WinscpExtensions</id>
+    <version>1.0.0</version>
+    <title>WinSCP Extensions</title>
+    <authors>Ronnie Overby</authors>
+    <owners>Ronnie Overby</owners>
+    <description>
+      The easiest way to use WinSCP in your .NET applications. 
+      
+      Features:
+        - Automatically ensures that WinSCP.exe exists in your app's working directory.
+        - Simplified API for upliading files. Automatically ensures remote directory structure exists.
+        - TPL friendly. Extension methods for aborting a session when cancellation is requested.
+        - Simple session configuration using connection strings.
+    </description>
+    <releaseNotes>
+    </releaseNotes>
+    <summary>
+      Makes it easy to use the WinSCP .NET library in your applications.
+    </summary>
+    <language>en-US</language>
+    <projectUrl>https://github.com/Core-Techs/Winscp.Extensions</projectUrl>
+    <iconUrl>http://core-techs.net/ctx-nuget-icon-32x32.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <licenseUrl>http://opensource.org/licenses/mit</licenseUrl>
+    <copyright>Copyright  2013</copyright>
+    <dependencies>
+    </dependencies>
+    <references></references>
+    <tags></tags>
+  </metadata>
+  <files>
+    <file src="..\Winscp.Extensions\bin\Release\CTX.WinscpExtensions.dll" target="lib" />
+    <file src="..\Winscp.Extensions\bin\Release\WinSCP.dll" target="lib" />
+    <!--<file src="tools\" target="tools" />-->
+    <file src="content\" target="content" />
+  </files>
+</package>
