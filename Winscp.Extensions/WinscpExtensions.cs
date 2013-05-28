@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
 using System.Threading;
@@ -12,15 +13,23 @@ namespace CTX.WinscpExtensions
     {
         static WinscpExtensions()
         {
-            EnsureExecutableExists();
+            if (AppSettings.AutoCreateExe)
+                EnsureExecutableExists();
         }
 
         public static void EnsureExecutableExists()
         {
             const string exeName = "WinSCP.exe";
             var exeInfo = new FileInfo(exeName);
-            if (!exeInfo.Exists)
+            if (!exeInfo.Exists || !DllAndExeVersionsMatch(exeInfo))
                 ExtractWinscpExe(new FileInfo(exeName));
+        }
+
+        private static bool DllAndExeVersionsMatch(FileInfo exeInfo)
+        {
+            var exeVersion = FileVersionInfo.GetVersionInfo(exeInfo.FullName).ProductVersion;
+            var dllVersion = FileVersionInfo.GetVersionInfo(typeof(Session).Assembly.Location).ProductVersion;
+            return exeVersion == dllVersion;
         }
 
         private static void ExtractWinscpExe(FileInfo destination)
@@ -76,11 +85,12 @@ namespace CTX.WinscpExtensions
         public static TransferOperationResult UploadFile(this Session session, string localFilePath,
                                                          string remoteFileName = null, string remoteDirectoryPath = null,
                                                          TransferOptions transferOptions = null,
+            bool ensureRemoteDirectoryStructureExists = true,
                                                          CancellationToken cancellationToken =
                                                              default(CancellationToken))
         {
             return session.UploadFile(new FileInfo(localFilePath), remoteFileName, remoteDirectoryPath, transferOptions,
-                                      cancellationToken);
+                                      ensureRemoteDirectoryStructureExists, cancellationToken);
         }
 
         /// <summary>
@@ -96,13 +106,15 @@ namespace CTX.WinscpExtensions
         /// <param name="transferOptions">Winscp specific transfer options.</param>
         public static TransferOperationResult UploadFile(this Session session, FileInfo localFile,
                                                          string remoteFileName = null, string remoteDirectoryPath = null,
-                                                         TransferOptions transferOptions = null, CancellationToken cancellationToken = default(CancellationToken))
+                                                         TransferOptions transferOptions = null, bool ensureRemoteDirectoryStructureExists = true, CancellationToken cancellationToken = default(CancellationToken))
         {
             var remoteDirs = new string[0];
             if (!string.IsNullOrWhiteSpace(remoteDirectoryPath))
             {
                 remoteDirs = SplitPath(remoteDirectoryPath);
-                EnsureRemoteDirectoryStructureInternal(session, remoteDirs, cancellationToken);
+
+                if (ensureRemoteDirectoryStructureExists)
+                    EnsureRemoteDirectoryStructureInternal(session, remoteDirs, cancellationToken);
             }
 
             if (string.IsNullOrWhiteSpace(remoteFileName))

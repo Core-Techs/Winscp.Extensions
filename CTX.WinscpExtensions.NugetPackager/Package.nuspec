@@ -11,7 +11,7 @@
       
       Features:
         - Automatically ensures that WinSCP.exe exists in your app's working directory.
-        - Simplified API for upliading files. Automatically ensures remote directory structure exists.
+        - Simplified API for uploading files. Automatically ensures remote directory structure exists.
         - TPL friendly. Extension methods for aborting a session when cancellation is requested.
         - Simple session configuration using connection strings.
     </description>
