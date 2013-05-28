@@ -10,7 +10,7 @@ http://winscp.net/eng/docs/installation or
 http://winscp.net/eng/docs/portable
 
 To use the WinSCP assembly via COM interop, register it using:
-%WINDIR%\Microsoft.NET\Framework\<version>\RegAsm.exe WinSCP.dll /codebase /tlb
+%WINDIR%\Microsoft.NET\Framework\<version>\RegAsm.exe WinSCPnet.dll /codebase /tlb
 where <version> is typically either v4.0.30319 or v2.0.50727.
 http://winscp.net/eng/docs/library_install#registering
 

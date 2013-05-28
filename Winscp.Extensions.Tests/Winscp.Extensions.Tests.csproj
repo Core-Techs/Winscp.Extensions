@@ -37,8 +37,8 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="WinSCP">
-      <HintPath>..\lib\WinSCP.dll</HintPath>
+    <Reference Include="WinSCPnet">
+      <HintPath>..\lib\WinSCPnet.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

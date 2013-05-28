@@ -122,18 +122,6 @@ namespace Winscp.Extensions.Tests
         }
 
         [Test]
-        [Ignore]
-        public void CanUploadBigFile()
-        {
-            using (var session = OpenSession())
-            using (var localFile = new DummyFile(52428800 /*50mb*/))
-            {
-                session.UploadFile(localFile.FileInfo);
-                Assert.True(session.FileExists(localFile.FileInfo.Name));
-            }
-        }
-
-        [Test]
         public void CanAbortUploadWithCancellationToken()
         {
             var cts = new CancellationTokenSource(TimeSpan.FromSeconds(5));
