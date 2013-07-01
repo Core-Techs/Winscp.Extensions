@@ -17,12 +17,22 @@ namespace CTX.WinscpExtensions
                 EnsureExecutableExists();
         }
 
+        public static FileInfo DefaultExecutableLocation
+        {
+            get
+            {
+                const string exeName = "WinSCP.exe";
+                var dir = new FileInfo(typeof(Session).Assembly.Location).Directory;
+                var exeInfo = new FileInfo(Path.Combine(dir.FullName, exeName));
+                return exeInfo;
+            }
+        }
+
         public static void EnsureExecutableExists()
         {
-            const string exeName = "WinSCP.exe";
-            var exeInfo = new FileInfo(exeName);
+            var exeInfo = DefaultExecutableLocation;
             if (!exeInfo.Exists || !DllAndExeVersionsMatch(exeInfo))
-                ExtractWinscpExe(new FileInfo(exeName));
+                ExtractWinscpExe(exeInfo);
         }
 
         private static bool DllAndExeVersionsMatch(FileInfo exeInfo)

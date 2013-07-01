@@ -29,7 +29,7 @@ namespace Winscp.Extensions.Tests
         [Test]
         public void TestExecutableExtraction()
         {
-            var exe = new FileInfo("winscp.exe");
+            var exe = WinscpExtensions.DefaultExecutableLocation;
             if (exe.Exists)
                 exe.Delete();
 

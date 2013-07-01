@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>CTX.WinscpExtensions</id>
-    <version>5.1.5.0</version>
+    <version>5.1.5.1</version>
     <title>WinSCP Extensions</title>
     <authors>Ronnie Overby</authors>
     <owners>Ronnie Overby</owners>
@@ -16,6 +16,7 @@
         - Simple session configuration using connection strings.
     </description>
     <releaseNotes>
+      Fixed a bug involving the Winscp executable's location.
     </releaseNotes>
     <summary>
       Makes it easy to use the WinSCP .NET library in your applications.
